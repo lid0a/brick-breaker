@@ -1,4 +1,4 @@
-import { Circle } from './lib/lib';
+import { Circle } from './lib/utils';
 import gameOptions from './game-options';
 
 export default class Bonus extends Circle {

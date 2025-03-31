@@ -1,24 +1,24 @@
 {
   "name": "swipe-break-breaker",
   "version": "1.0.0",
-  "homepage": "https://odil-abdulloyev.github.io/swipe-brick-breaker",
+  "homepage": "https://lid0a.github.io/swipe-brick-breaker",
   "description": "Browser version of Swipe Break Breaker game",
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack --watch --mode development",
-    "eslint": "./node_modules/.bin/eslint src/js/ --fix",
+    "eslint": "eslint src/js/ --fix",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/odil-abdulloyev/swipe-brick-breaker.git"
+    "url": "git+https://github.com/lid0a/swipe-brick-breaker.git"
   },
   "author": "Odil",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/odil-abdulloyev/swipe-brick-breaker/issues"
+    "url": "https://github.com/lid0a/swipe-brick-breaker/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -36,10 +36,12 @@
     "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^4.5.0",
     "mini-css-extract-plugin": "^1.3.3",
-    "node-sass": "^9.0.0",
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.76.0",
     "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "sass": "^1.86.0"
   }
 }

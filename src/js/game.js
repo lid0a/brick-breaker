@@ -6,7 +6,7 @@ import gameDOMElements from './game-dom-elements';
 import Block from './block';
 import Ball from './ball';
 import Bonus from './bonus';
-import { Point2D, collisionDetected, distance } from './lib/lib';
+import { Point2D, collisionDetected, distance } from './lib/utils';
 import { renderDOMElement } from './utils/dom';
 import { getCachedRandom, findByField } from './utils/helpers';
 import DBManager from './utils/db-manager';
@@ -16,8 +16,10 @@ const GAME = {
   objects: gameObjects,
   state: gameState,
   DOMElements: gameDOMElements,
-  DBManager: new DBManager('https://swipe-brick-breaker-52559-default-rtdb.firebaseio.com/players.json'),
-  highScores: null
+  DBManager: new DBManager(
+    'https://swipe-brick-breaker-52559-default-rtdb.firebaseio.com/players.json',
+  ),
+  highScores: null,
 };
 
 GAME.createBlocksAndBonus = function () {
@@ -39,17 +41,22 @@ GAME.createBlocksAndBonus = function () {
       new Point2D(blockX, blockY),
       this.options.BLOCK_WIDTH,
       this.options.BLOCK_HEIGHT,
-      this.state.level
+      this.state.level,
     );
     block.draw(this.setBlockColor(block));
     this.objects.blocks.push(block);
   }
   const bonusX = rand() * (this.options.BLOCK_WIDTH + this.options.INTERVAL_SIZE)
-    + this.options.BLOCK_WIDTH / 2 - this.options.BONUS_RADIUS;
-  const bonusY = this.options.BLOCK_HEIGHT + this.options.INTERVAL_SIZE
-    + this.options.BLOCK_HEIGHT / 2 - this.options.BONUS_RADIUS;
+    + this.options.BLOCK_WIDTH / 2
+    - this.options.BONUS_RADIUS;
+  const bonusY = this.options.BLOCK_HEIGHT
+    + this.options.INTERVAL_SIZE
+    + this.options.BLOCK_HEIGHT / 2
+    - this.options.BONUS_RADIUS;
   const bonus = new Bonus(
-    this.objects.context, new Point2D(bonusX, bonusY), this.options.BONUS_RADIUS
+    this.objects.context,
+    new Point2D(bonusX, bonusY),
+    this.options.BONUS_RADIUS,
   );
   bonus.draw(this.options.BONUS_COLOR);
   this.objects.bonuses.push(bonus);
@@ -59,7 +66,7 @@ GAME.createBall = function () {
   const ball = new Ball(
     this.objects.context,
     new Point2D(this.state.startPosition.x, this.state.startPosition.y),
-    this.options.BALL_RADIUS
+    this.options.BALL_RADIUS,
   );
   ball.setSpeed(this.options.BALL_SPEED);
   ball.draw(this.options.BALL_COLOR);
@@ -67,13 +74,23 @@ GAME.createBall = function () {
 };
 
 GAME.strictClearField = function () {
-  this.objects.context.clearRect(0, 0, this.objects.field.width, this.objects.field.height);
+  this.objects.context.clearRect(
+    0,
+    0,
+    this.objects.field.width,
+    this.objects.field.height,
+  );
 };
 
 GAME.trailingClearField = function () {
   this.objects.context.save();
   this.objects.context.fillStyle = `${this.options.FIELD_COLOR}60`;
-  this.objects.context.fillRect(0, 0, this.objects.field.width, this.objects.field.height);
+  this.objects.context.fillRect(
+    0,
+    0,
+    this.objects.field.width,
+    this.objects.field.height,
+  );
   this.objects.context.restore();
 };
 
@@ -95,7 +112,10 @@ GAME.redrawObjects = function () {
 
 GAME.placeBalls = function () {
   this.objects.balls.forEach((ball) => {
-    ball.position = new Point2D(this.state.startPosition.x, this.state.startPosition.y);
+    ball.position = new Point2D(
+      this.state.startPosition.x,
+      this.state.startPosition.y,
+    );
   });
 };
 
@@ -115,7 +135,7 @@ GAME.setBlockColor = function (block) {
 
 GAME.gameOver = function () {
   return this.objects.blocks.some(
-    (block) => block.position.y + block.height === this.objects.field.height
+    (block) => block.position.y + block.height === this.objects.field.height,
   );
 };
 
@@ -126,7 +146,9 @@ GAME.updateUI = function () {
   this.DOMElements.ballsElement.dataset.balls = this.objects.balls.length;
   this.highScores.then((response) => {
     const rows = response.reduce((html, record, i) => {
-      this.DOMElements.recordElement.dataset.record = response.length ? response[0].score : 0;
+      this.DOMElements.recordElement.dataset.record = response.length
+        ? response[0].score
+        : 0;
       const tr = `
         <tr>
           <td>${i + 1}</td>
@@ -182,8 +204,8 @@ GAME.startNewStage = function () {
   this.objects.aim.setOrigin(
     new Point2D(
       this.state.startPosition.x + this.options.BALL_RADIUS,
-      this.objects.field.height - this.options.BALL_RADIUS
-    )
+      this.objects.field.height - this.options.BALL_RADIUS,
+    ),
   );
 };
 
@@ -194,15 +216,26 @@ GAME.handleBallAndBlockCollision = function (ball, block) {
     }
     return value;
   };
-  const pointX = getPoint(ball.center.x, block.position.x, block.position.x + block.width);
-  const pointY = getPoint(ball.center.y, block.position.y, block.position.y + block.height);
+  const pointX = getPoint(
+    ball.center.x,
+    block.position.x,
+    block.position.x + block.width,
+  );
+  const pointY = getPoint(
+    ball.center.y,
+    block.position.y,
+    block.position.y + block.height,
+  );
   if (distance(ball.center, new Point2D(pointX, pointY)) <= ball.radius) {
     let nx = ball.center.x - pointX;
     let ny = ball.center.y - pointY;
     const len = Math.sqrt(nx * nx + ny * ny);
-    if (len <= ball.radius
-      && (pointX === block.position.x || pointX === block.position.x + block.width)
-      && (pointY === block.position.y || pointY === block.position.y + block.height)
+    if (
+      len <= ball.radius
+      && (pointX === block.position.x
+        || pointX === block.position.x + block.width)
+      && (pointY === block.position.y
+        || pointY === block.position.y + block.height)
     ) {
       nx /= len;
       ny /= len;
@@ -211,11 +244,19 @@ GAME.handleBallAndBlockCollision = function (ball, block) {
       ball.vy -= +(2 * projection * ny).toFixed(2);
       ball.normalizeSpeed();
     } else {
-      if (pointX === block.position.x + block.width || pointX === block.position.x) {
-        ball.position.x = pointX === block.position.x + block.width ? pointX : pointX - ball.width;
+      if (
+        pointX === block.position.x + block.width
+        || pointX === block.position.x
+      ) {
+        ball.position.x = pointX === block.position.x + block.width
+          ? pointX
+          : pointX - ball.width;
         ball.vx *= -1;
       }
-      if (pointY === block.position.y + block.height || pointY === block.position.y) {
+      if (
+        pointY === block.position.y + block.height
+        || pointY === block.position.y
+      ) {
         ball.position.y = pointY === block.position.y + block.height
           ? pointY
           : pointY - ball.height;
@@ -238,11 +279,17 @@ GAME.playSound = function (sound) {
 };
 
 GAME.handleBallAndWallCollision = function (ball) {
-  if (ball.position.x <= 0 || ball.position.x + ball.width >= this.objects.field.width) {
+  if (
+    ball.position.x <= 0
+    || ball.position.x + ball.width >= this.objects.field.width
+  ) {
     ball.position.x = ball.position.x <= 0 ? 0 : this.objects.field.width - ball.width;
     ball.vx *= -1;
   }
-  if (ball.position.y <= 0 || ball.position.y + ball.height > this.objects.field.height) {
+  if (
+    ball.position.y <= 0
+    || ball.position.y + ball.height > this.objects.field.height
+  ) {
     ball.position.y = ball.position.y <= 0 ? 0 : this.objects.field.height - ball.height;
     if (ball.position.y <= 0) {
       ball.vy *= -1;
@@ -263,15 +310,17 @@ GAME.handleBallAndBonusCollision = function (ball, bonus) {
 
 GAME.endOfStage = function () {
   return this.objects.balls.every(
-    (ball) => ball.position.y + ball.height >= this.objects.field.height
+    (ball) => ball.position.y + ball.height >= this.objects.field.height,
   );
 };
 
 GAME.animate = function () {
-  this.state.requests.push(window.requestAnimationFrame(() => {
-    this.animate();
-    this.redrawObjects();
-  }));
+  this.state.requests.push(
+    window.requestAnimationFrame(() => {
+      this.animate();
+      this.redrawObjects();
+    }),
+  );
 
   let firstBall = true;
   this.objects.balls.forEach((ball, i) => {
@@ -279,15 +328,20 @@ GAME.animate = function () {
       if (i === 0) {
         ball.move();
       } else {
-        this.state.timeouts.push(window.setTimeout(() => {
-          ball.move();
-        }, this.options.BALL_SHOOT_TIMEOUT * i));
+        this.state.timeouts.push(
+          window.setTimeout(() => {
+            ball.move();
+          }, this.options.BALL_SHOOT_TIMEOUT * i),
+        );
       }
     });
     if (ball.position.y + ball.height > this.objects.field.height) {
       if (firstBall) {
         firstBall = false;
-        this.state.startPosition = new Point2D(ball.position.x, this.state.startPosition.y);
+        this.state.startPosition = new Point2D(
+          ball.position.x,
+          this.state.startPosition.y,
+        );
       }
     }
     this.handleBallAndWallCollision(ball);
@@ -326,16 +380,19 @@ GAME.handleMouseUp = function () {
     this.objects.aim.isActive = false;
     this.objects.aim.isBlocked = true;
     const calcSpeed = (x) => +(
-      (this.options.BALL_SPEED * x) / Math.sqrt(this.objects.aim.vx ** 2 + this.objects.aim.vy ** 2)
+      (this.options.BALL_SPEED * x)
+        / Math.sqrt(this.objects.aim.vx ** 2 + this.objects.aim.vy ** 2)
     ).toFixed(2);
     this.objects.balls.forEach((ball) => {
       ball.setVx(calcSpeed(this.objects.aim.vx));
       ball.setVy(calcSpeed(this.objects.aim.vy));
       ball.normalizeSpeed();
     });
-    this.state.requests.push(window.requestAnimationFrame(() => {
-      this.animate();
-    }));
+    this.state.requests.push(
+      window.requestAnimationFrame(() => {
+        this.animate();
+      }),
+    );
   }
 };
 
@@ -365,7 +422,7 @@ function handleMouseUp(e) {
 GAME.init = function () {
   this.highScores = this.DBManager.getRecords()
     .then((records) => records.sort((lhs, rhs) => rhs.score - lhs.score))
-    .then((sortedRecords) => sortedRecords.slice(0, this.options.MAX_RECORDS_COUNT));
+    .then((sortedRecords) => sortedRecords.slice(0, this.options.MAX_RECORDS_COUNT),);
   renderDOMElement(this.objects.field, document.getElementById('app'));
   this.createBlocksAndBonus();
   this.createBall();
@@ -379,11 +436,11 @@ GAME.reset = function () {
   this.state.level = 1;
   this.state.startPosition = new Point2D(
     this.objects.field.width / 2 - gameOptions.BALL_RADIUS,
-    this.objects.field.height - 2 * gameOptions.BALL_RADIUS - 1
+    this.objects.field.height - 2 * gameOptions.BALL_RADIUS - 1,
   );
   this.objects.aim.origin = new Point2D(
     this.state.startPosition.x + this.options.BALL_RADIUS,
-    this.state.startPosition.y + this.options.BALL_RADIUS
+    this.state.startPosition.y + this.options.BALL_RADIUS,
   );
   this.objects.aim.isActive = false;
   this.objects.aim.isBlocked = false;

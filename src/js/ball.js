@@ -1,4 +1,4 @@
-import { Circle } from './lib/lib';
+import { Circle } from './lib/utils';
 
 export default class Ball extends Circle {
   constructor(context, position, radius) {

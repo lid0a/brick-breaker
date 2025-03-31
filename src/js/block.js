@@ -1,4 +1,4 @@
-import { Rectangle } from './lib/lib';
+import { Rectangle } from './lib/utils';
 import gameOption from './game-options';
 
 export default class Block extends Rectangle {
@@ -19,7 +19,11 @@ export default class Block extends Rectangle {
     this.context.font = '1.2rem monospace';
     this.context.textAlign = 'center';
     this.context.textBaseline = 'middle';
-    this.context.fillText(`${this.hp}`, this.position.x + this.width / 2, this.position.y + this.height / 2);
+    this.context.fillText(
+      `${this.hp}`,
+      this.position.x + this.width / 2,
+      this.position.y + this.height / 2,
+    );
     this.context.restore();
     return this;
   }

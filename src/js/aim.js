@@ -1,4 +1,4 @@
-import { Point2D, Line } from './lib/lib';
+import { Point2D, Line } from './lib/utils';
 
 function getMousePosition(event) {
   const rect = event.target.getBoundingClientRect();
@@ -30,7 +30,10 @@ export default class Aim {
   draw(color) {
     this.context.save();
     const k = 9999;
-    const end = new Point2D(this.origin.x + k * this.vx, this.origin.y + k * this.vy);
+    const end = new Point2D(
+      this.origin.x + k * this.vx,
+      this.origin.y + k * this.vy,
+    );
     const line = new Line(this.context, this.origin, end);
     this.context.strokeStyle = color;
     this.context.lineWidth = 3;
