@@ -1,4 +1,4 @@
-import Shape from './shape';
+import Shape from "./shape.js";
 
 export default class Rectangle extends Shape {
   draw(isFilled = false) {

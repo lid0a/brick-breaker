@@ -1,4 +1,4 @@
-import { Circle } from './lib/utils';
+import { Circle } from "./lib/utils.js";
 
 export default class Ball extends Circle {
   constructor(context, position, radius) {

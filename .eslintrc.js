@@ -1,20 +1,18 @@
-module.exports = {
-  parser: 'babel-eslint',
+export default {
+  parser: "babel-eslint",
   env: {
     browser: true,
     es2021: true,
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ["airbnb-base"],
   parserOptions: {
     ecmaVersion: 12,
-    sourceType: 'module',
+    sourceType: "module",
   },
   rules: {
-    'no-plusplus': 'off',
-    'comma-dangle': 'off',
-    'no-param-reassign': 'off',
-    'func-names': 'off'
+    "no-plusplus": "off",
+    "comma-dangle": "off",
+    "no-param-reassign": "off",
+    "func-names": "off",
   },
 };

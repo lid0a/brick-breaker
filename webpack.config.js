@@ -1,22 +1,23 @@
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+import { resolve } from "node:path";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import { CleanWebpackPlugin } from "clean-webpack-plugin";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import CopyPlugin from "copy-webpack-plugin";
 
-module.exports = {
+const __dirname = import.meta.dirname;
+
+export default {
   entry: "./src/js/main.js",
   devtool: "inline-source-map",
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "dist"),
-    publicPath: "",
+    path: resolve(__dirname, "dist"),
   },
-
+  mode: "development",
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.m?js$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -31,7 +32,6 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpe?g|gif|mp3)$/,
-        loader: "file-loader",
         type: "asset/resource",
       },
     ],
@@ -40,7 +40,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: "index.html",
+      template: "src/index.html",
     }),
     new MiniCssExtractPlugin({
       filename: "style.css",
@@ -48,8 +48,8 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "assets"),
-          to: path.resolve(__dirname, "dist/assets"),
+          from: resolve(__dirname, "assets"),
+          to: resolve(__dirname, "dist/assets"),
         },
       ],
     }),

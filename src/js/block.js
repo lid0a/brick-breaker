@@ -1,5 +1,5 @@
-import { Rectangle } from './lib/utils';
-import gameOption from './game-options';
+import { Rectangle } from "./lib/utils.js";
+import gameOption from "./game-options.js";
 
 export default class Block extends Rectangle {
   constructor(context, position, width, height, hp) {
@@ -14,11 +14,11 @@ export default class Block extends Rectangle {
     this.context.shadowOffsetX = 4;
     this.context.shadowOffsetY = 4;
     super.draw(true);
-    this.context.shadowColor = 'transparent';
-    this.context.fillStyle = '#ffffff';
-    this.context.font = '1.2rem monospace';
-    this.context.textAlign = 'center';
-    this.context.textBaseline = 'middle';
+    this.context.shadowColor = "transparent";
+    this.context.fillStyle = "#ffffff";
+    this.context.font = "1.2rem monospace";
+    this.context.textAlign = "center";
+    this.context.textBaseline = "middle";
     this.context.fillText(
       `${this.hp}`,
       this.position.x + this.width / 2,

@@ -1,15 +1,15 @@
-import gameOptions from './game-options';
-import gameState from './game-state';
-import gameObjects from './game-objects';
-import gameDOMElements from './game-dom-elements';
+import gameOptions from "./game-options.js";
+import gameState from "./game-state.js";
+import gameObjects from "./game-objects.js";
+import gameDOMElements from "./game-dom-elements.js";
 
-import Block from './block';
-import Ball from './ball';
-import Bonus from './bonus';
-import { Point2D, collisionDetected, distance } from './lib/utils';
-import { renderDOMElement } from './utils/dom';
-import { getCachedRandom, findByField } from './utils/helpers';
-import DBManager from './utils/db-manager';
+import Block from "./block.js";
+import Ball from "./ball.js";
+import Bonus from "./bonus.js";
+import { Point2D, collisionDetected, distance } from "./lib/utils.js";
+import { renderDOMElement } from "./utils/dom.js";
+import { getCachedRandom, findByField } from "./utils/helpers.js";
+import DBManager from "./utils/db-manager.js";
 
 const GAME = {
   options: gameOptions,
@@ -17,7 +17,7 @@ const GAME = {
   state: gameState,
   DOMElements: gameDOMElements,
   DBManager: new DBManager(
-    'https://swipe-brick-breaker-52559-default-rtdb.firebaseio.com/players.json',
+    "https://swipe-brick-breaker-52559-default-rtdb.firebaseio.com/players.json",
   ),
   highScores: null,
 };
@@ -34,7 +34,8 @@ GAME.createBlocksAndBonus = function () {
     count = getRandomCount([2, 3]);
   }
   for (let i = 0; i < count; ++i) {
-    const blockX = rand() * (this.options.BLOCK_WIDTH + this.options.INTERVAL_SIZE);
+    const blockX =
+      rand() * (this.options.BLOCK_WIDTH + this.options.INTERVAL_SIZE);
     const blockY = this.options.BLOCK_HEIGHT + this.options.INTERVAL_SIZE;
     const block = new Block(
       this.objects.context,
@@ -46,13 +47,15 @@ GAME.createBlocksAndBonus = function () {
     block.draw(this.setBlockColor(block));
     this.objects.blocks.push(block);
   }
-  const bonusX = rand() * (this.options.BLOCK_WIDTH + this.options.INTERVAL_SIZE)
-    + this.options.BLOCK_WIDTH / 2
-    - this.options.BONUS_RADIUS;
-  const bonusY = this.options.BLOCK_HEIGHT
-    + this.options.INTERVAL_SIZE
-    + this.options.BLOCK_HEIGHT / 2
-    - this.options.BONUS_RADIUS;
+  const bonusX =
+    rand() * (this.options.BLOCK_WIDTH + this.options.INTERVAL_SIZE) +
+    this.options.BLOCK_WIDTH / 2 -
+    this.options.BONUS_RADIUS;
+  const bonusY =
+    this.options.BLOCK_HEIGHT +
+    this.options.INTERVAL_SIZE +
+    this.options.BLOCK_HEIGHT / 2 -
+    this.options.BONUS_RADIUS;
   const bonus = new Bonus(
     this.objects.context,
     new Point2D(bonusX, bonusY),
@@ -158,8 +161,8 @@ GAME.updateUI = function () {
         </tr>
       `;
       return html + tr;
-    }, '');
-    this.DOMElements.tableElement.querySelector('tbody').innerHTML = rows;
+    }, "");
+    this.DOMElements.tableElement.querySelector("tbody").innerHTML = rows;
   });
 };
 
@@ -179,15 +182,15 @@ GAME.startNewStage = function () {
   });
   if (this.gameOver()) {
     this.highScores
-      .then((response) => findByField(response, 'score', this.state.level - 1))
+      .then((response) => findByField(response, "score", this.state.level - 1))
       .then((position) => {
         if (position < this.options.MAX_RECORDS_COUNT - 1) {
-          this.DOMElements.newRecordModalElement.classList.add('active');
+          this.DOMElements.newRecordModalElement.classList.add("active");
         } else {
-          this.DOMElements.gameOverModalElement.classList.add('active');
+          this.DOMElements.gameOverModalElement.classList.add("active");
         }
       });
-    this.DOMElements.overlayElement.classList.add('active');
+    this.DOMElements.overlayElement.classList.add("active");
     this.playSound(this.DOMElements.gameOverSound);
   }
 
@@ -231,11 +234,11 @@ GAME.handleBallAndBlockCollision = function (ball, block) {
     let ny = ball.center.y - pointY;
     const len = Math.sqrt(nx * nx + ny * ny);
     if (
-      len <= ball.radius
-      && (pointX === block.position.x
-        || pointX === block.position.x + block.width)
-      && (pointY === block.position.y
-        || pointY === block.position.y + block.height)
+      len <= ball.radius &&
+      (pointX === block.position.x ||
+        pointX === block.position.x + block.width) &&
+      (pointY === block.position.y ||
+        pointY === block.position.y + block.height)
     ) {
       nx /= len;
       ny /= len;
@@ -245,21 +248,23 @@ GAME.handleBallAndBlockCollision = function (ball, block) {
       ball.normalizeSpeed();
     } else {
       if (
-        pointX === block.position.x + block.width
-        || pointX === block.position.x
+        pointX === block.position.x + block.width ||
+        pointX === block.position.x
       ) {
-        ball.position.x = pointX === block.position.x + block.width
-          ? pointX
-          : pointX - ball.width;
+        ball.position.x =
+          pointX === block.position.x + block.width
+            ? pointX
+            : pointX - ball.width;
         ball.vx *= -1;
       }
       if (
-        pointY === block.position.y + block.height
-        || pointY === block.position.y
+        pointY === block.position.y + block.height ||
+        pointY === block.position.y
       ) {
-        ball.position.y = pointY === block.position.y + block.height
-          ? pointY
-          : pointY - ball.height;
+        ball.position.y =
+          pointY === block.position.y + block.height
+            ? pointY
+            : pointY - ball.height;
         ball.vy *= -1;
       }
     }
@@ -280,17 +285,19 @@ GAME.playSound = function (sound) {
 
 GAME.handleBallAndWallCollision = function (ball) {
   if (
-    ball.position.x <= 0
-    || ball.position.x + ball.width >= this.objects.field.width
+    ball.position.x <= 0 ||
+    ball.position.x + ball.width >= this.objects.field.width
   ) {
-    ball.position.x = ball.position.x <= 0 ? 0 : this.objects.field.width - ball.width;
+    ball.position.x =
+      ball.position.x <= 0 ? 0 : this.objects.field.width - ball.width;
     ball.vx *= -1;
   }
   if (
-    ball.position.y <= 0
-    || ball.position.y + ball.height > this.objects.field.height
+    ball.position.y <= 0 ||
+    ball.position.y + ball.height > this.objects.field.height
   ) {
-    ball.position.y = ball.position.y <= 0 ? 0 : this.objects.field.height - ball.height;
+    ball.position.y =
+      ball.position.y <= 0 ? 0 : this.objects.field.height - ball.height;
     if (ball.position.y <= 0) {
       ball.vy *= -1;
     } else {
@@ -379,10 +386,11 @@ GAME.handleMouseUp = function () {
   if (!this.objects.aim.isBlocked) {
     this.objects.aim.isActive = false;
     this.objects.aim.isBlocked = true;
-    const calcSpeed = (x) => +(
-      (this.options.BALL_SPEED * x)
-        / Math.sqrt(this.objects.aim.vx ** 2 + this.objects.aim.vy ** 2)
-    ).toFixed(2);
+    const calcSpeed = (x) =>
+      +(
+        (this.options.BALL_SPEED * x) /
+        Math.sqrt(this.objects.aim.vx ** 2 + this.objects.aim.vy ** 2)
+      ).toFixed(2);
     this.objects.balls.forEach((ball) => {
       ball.setVx(calcSpeed(this.objects.aim.vx));
       ball.setVy(calcSpeed(this.objects.aim.vy));
@@ -422,14 +430,16 @@ function handleMouseUp(e) {
 GAME.init = function () {
   this.highScores = this.DBManager.getRecords()
     .then((records) => records.sort((lhs, rhs) => rhs.score - lhs.score))
-    .then((sortedRecords) => sortedRecords.slice(0, this.options.MAX_RECORDS_COUNT),);
-  renderDOMElement(this.objects.field, document.getElementById('app'));
+    .then((sortedRecords) =>
+      sortedRecords.slice(0, this.options.MAX_RECORDS_COUNT),
+    );
+  renderDOMElement(this.objects.field, document.getElementById("app"));
   this.createBlocksAndBonus();
   this.createBall();
   this.updateUI();
-  this.objects.field.addEventListener('mousedown', handleMouseDown);
-  this.objects.field.addEventListener('mousemove', handleMouseMove);
-  this.objects.field.addEventListener('mouseup', handleMouseUp);
+  this.objects.field.addEventListener("mousedown", handleMouseDown);
+  this.objects.field.addEventListener("mousemove", handleMouseMove);
+  this.objects.field.addEventListener("mouseup", handleMouseUp);
 };
 
 GAME.reset = function () {
@@ -452,9 +462,9 @@ GAME.reset = function () {
   this.state.newBallsCount = 0;
   this.strictClearField();
   this.redrawObjects();
-  this.objects.field.removeEventListener('mousedown', handleMouseDown);
-  this.objects.field.removeEventListener('mousemove', handleMouseMove);
-  this.objects.field.removeEventListener('mouseup', handleMouseUp);
+  this.objects.field.removeEventListener("mousedown", handleMouseDown);
+  this.objects.field.removeEventListener("mousemove", handleMouseMove);
+  this.objects.field.removeEventListener("mouseup", handleMouseUp);
   this.objects.field.remove();
 };
 

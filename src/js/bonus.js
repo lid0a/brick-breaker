@@ -1,5 +1,5 @@
-import { Circle } from './lib/utils';
-import gameOptions from './game-options';
+import { Circle } from "./lib/utils.js";
+import gameOptions from "./game-options.js";
 
 export default class Bonus extends Circle {
   draw(color) {
