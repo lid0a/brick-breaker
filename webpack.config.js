@@ -6,6 +6,7 @@ import CopyPlugin from "copy-webpack-plugin";
 
 const __dirname = import.meta.dirname;
 
+/** @type {import('webpack').Configuration} */
 export default {
   entry: "./src/js/main.js",
   devtool: "inline-source-map",
