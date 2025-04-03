@@ -4,6 +4,8 @@ import { CleanWebpackPlugin } from "clean-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import CopyPlugin from "copy-webpack-plugin";
 
+const devMode = process.env.NODE_ENV !== "production";
+
 const __dirname = import.meta.dirname;
 
 /** @type {import('webpack').Configuration} */
@@ -28,8 +30,12 @@ export default {
         },
       },
       {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        test: /\.(sa|sc|c)ss$/i,
+        use: [
+          devMode ? "style-loader" : MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ],
       },
       {
         test: /\.(png|svg|jpe?g|gif|mp3)$/,
@@ -43,9 +49,6 @@ export default {
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
-    new MiniCssExtractPlugin({
-      filename: "style.css",
-    }),
     new CopyPlugin({
       patterns: [
         {
@@ -54,5 +57,5 @@ export default {
         },
       ],
     }),
-  ],
+  ].concat(devMode ? [] : [new MiniCssExtractPlugin()]),
 };
