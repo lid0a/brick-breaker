@@ -1,0 +1,11 @@
+.game-field {
+    display: block;
+    background: var(--color-background);
+    border: 2px solid var(--color-border);
+    order: -1;
+}
+
+.game-field.dark {
+    background: var(--color-background-dark);
+    border-color: var(--color-border-dark);
+}

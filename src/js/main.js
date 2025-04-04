@@ -1,4 +1,4 @@
-import "../scss/style.scss";
+import "../css/style.css";
 import GAME from "./game.js";
 import { formatDate } from "./utils/helpers.js";
 

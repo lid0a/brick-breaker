@@ -1,0 +1,18 @@
+.switch {
+    width: 50px;
+    height: 28px;
+}
+
+.switch-slider {
+    border-radius: 28px;
+    &::before {
+        height: 24px;
+        width: 24px;
+        left: 2px;
+        bottom: 2px;
+    }
+}
+
+input:checked + .switch-slider:before {
+    transform: translateX(22px);
+}

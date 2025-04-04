@@ -34,7 +34,6 @@ export default {
         use: [
           devMode ? "style-loader" : MiniCssExtractPlugin.loader,
           "css-loader",
-          "sass-loader",
         ],
       },
       {
