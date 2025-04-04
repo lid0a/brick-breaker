@@ -40,10 +40,10 @@ gameDOMElements.aboutMenuItemElement.addEventListener("click", () => {
   gameDOMElements.overlayElement.classList.add("active");
 });
 
-const modalCards = document.querySelectorAll(".dialog-card");
+const modalCards = document.querySelectorAll(".modal-card");
 modalCards.forEach((modal) => {
   modal.addEventListener("click", (e) => {
-    if (e.target.classList.contains("dialog-card__close-button")) {
+    if (e.target.classList.contains("modal-card__close-button")) {
       modal.classList.remove("active");
       gameDOMElements.overlayElement.classList.remove("active");
     }
