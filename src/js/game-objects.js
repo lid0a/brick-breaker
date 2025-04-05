@@ -1,4 +1,4 @@
-import { createDOMElement } from "./utils/dom.js";
+import { createElement } from "./utils/dom.js";
 import { Point2D } from "./lib/utils.js";
 import Aim from "./aim.js";
 import gameOptions from "./game-options.js";
@@ -9,20 +9,16 @@ const gameObjects = {
   bonuses: [],
 };
 
-gameObjects.field = createDOMElement(
-  "canvas",
-  {
-    id: "game-field",
-    className: "game-field",
-    width:
-      gameOptions.COLUMNS * gameOptions.BLOCK_WIDTH +
-      (gameOptions.COLUMNS - 1) * gameOptions.INTERVAL_SIZE,
-    height:
-      gameOptions.ROWS * gameOptions.BLOCK_HEIGHT +
-      (gameOptions.ROWS - 1) * gameOptions.INTERVAL_SIZE,
-  },
-  null,
-);
+gameObjects.field = createElement("canvas", {
+  id: "game-field",
+  class: "game-field",
+  width:
+    gameOptions.COLUMNS * gameOptions.BLOCK_WIDTH +
+    (gameOptions.COLUMNS - 1) * gameOptions.INTERVAL_SIZE,
+  height:
+    gameOptions.ROWS * gameOptions.BLOCK_HEIGHT +
+    (gameOptions.ROWS - 1) * gameOptions.INTERVAL_SIZE,
+});
 
 gameObjects.context = gameObjects.field.getContext("2d");
 
