@@ -20,16 +20,6 @@ export default {
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env"],
-          },
-        },
-      },
-      {
         test: /\.(sa|sc|c)ss$/i,
         use: [
           devMode ? "style-loader" : MiniCssExtractPlugin.loader,
@@ -42,7 +32,6 @@ export default {
       },
     ],
   },
-
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
