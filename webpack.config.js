@@ -10,7 +10,7 @@ const __dirname = import.meta.dirname;
 
 /** @type {import('webpack').Configuration} */
 export default {
-  entry: "./src/js/main.js",
+  entry: "./src/index.js",
   devtool: "inline-source-map",
   output: {
     filename: "bundle.js",
@@ -27,8 +27,12 @@ export default {
         ],
       },
       {
-        test: /\.(png|svg|jpe?g|gif|mp3)$/,
+        test: /\.(png|jpe?g|gif|mp3)$/,
         type: "asset/resource",
+      },
+      {
+        test: /\.svg$/i,
+        type: "asset/source",
       },
     ],
   },
@@ -40,8 +44,8 @@ export default {
     new CopyPlugin({
       patterns: [
         {
-          from: resolve(__dirname, "assets"),
-          to: resolve(__dirname, "dist/assets"),
+          from: resolve(__dirname, "public"),
+          to: resolve(__dirname, "dist/public"),
         },
       ],
     }),

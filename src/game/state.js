@@ -1,6 +1,6 @@
-import { Point2D } from "./lib/utils.js";
-import gameOptions from "./game-options.js";
-import gameObjects from "./game-objects.js";
+import { Point2D } from "../engine/utils.js";
+import gameOptions from "./options.js";
+import gameObjects from "./objects.js";
 
 const gameState = {
   level: 1,

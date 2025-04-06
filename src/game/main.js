@@ -1,15 +1,15 @@
-import gameOptions from "./game-options.js";
-import gameState from "./game-state.js";
-import gameObjects from "./game-objects.js";
-import gameDOMElements from "./game-dom-elements.js";
+import gameOptions from "./options.js";
+import gameState from "./state.js";
+import gameObjects from "./objects.js";
+import gameDOMElements from "./dom-elements.js";
 
 import Block from "./block.js";
 import Ball from "./ball.js";
 import Bonus from "./bonus.js";
-import { Point2D, collisionDetected, distance } from "./lib/utils.js";
-import { renderDOMElement } from "./utils/dom.js";
-import { getCachedRandom, findByField } from "./utils/helpers.js";
-import DBManager from "./utils/db-manager.js";
+import { Point2D, collisionDetected, distance } from "../engine/utils.js";
+import { renderDOMElement } from "../utils/dom.js";
+import { getCachedRandom, findByField } from "../utils/helpers.js";
+import DBManager from "../utils/db-manager.js";
 
 const GAME = {
   options: gameOptions,
@@ -87,7 +87,10 @@ GAME.strictClearField = function () {
 
 GAME.trailingClearField = function () {
   this.objects.context.save();
-  this.objects.context.fillStyle = `${this.options.FIELD_COLOR}60`;
+  const bgColor = getComputedStyle(this.objects.field).getPropertyValue(
+    "--color-background",
+  );
+  this.objects.context.fillStyle = bgColor;
   this.objects.context.fillRect(
     0,
     0,
@@ -162,7 +165,7 @@ GAME.updateUI = function () {
       `;
       return html + tr;
     }, "");
-    this.DOMElements.tableElement.querySelector("tbody").innerHTML = rows;
+    this.DOMElements.bestPlayersDialog.querySelector("tbody").innerHTML = rows;
   });
 };
 
@@ -185,12 +188,11 @@ GAME.startNewStage = function () {
       .then((response) => findByField(response, "score", this.state.level - 1))
       .then((position) => {
         if (position < this.options.MAX_RECORDS_COUNT - 1) {
-          this.DOMElements.newRecordModalElement.classList.add("active");
+          this.DOMElements.newRecordDialog.showModal();
         } else {
-          this.DOMElements.gameOverModalElement.classList.add("active");
+          this.DOMElements.gameOverDialog.showModal();
         }
       });
-    this.DOMElements.overlayElement.classList.add("active");
     this.playSound(this.DOMElements.gameOverSound);
   }
 

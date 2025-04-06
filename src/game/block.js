@@ -1,5 +1,5 @@
-import { Rectangle } from "./lib/utils.js";
-import gameOption from "./game-options.js";
+import { Rectangle } from "../engine/utils.js";
+import gameOption from "./options.js";
 
 export default class Block extends Rectangle {
   constructor(context, position, width, height, hp) {

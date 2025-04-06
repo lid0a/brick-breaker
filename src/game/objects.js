@@ -1,7 +1,7 @@
-import { createElement } from "./utils/dom.js";
-import { Point2D } from "./lib/utils.js";
+import { createElement } from "../utils/dom.js";
+import { Point2D } from "../engine/utils.js";
 import Aim from "./aim.js";
-import gameOptions from "./game-options.js";
+import gameOptions from "./options.js";
 
 const gameObjects = {
   balls: [],
