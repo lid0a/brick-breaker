@@ -8,7 +8,7 @@ import Ball from "./ball.js";
 import Bonus from "./bonus.js";
 import { Point2D, collisionDetected, distance } from "../engine/utils.js";
 import { renderDOMElement } from "../utils/dom.js";
-import { getCachedRandom, findByField } from "../utils/helpers.js";
+import { getCachedRandom, findByField, formatDate } from "../utils/helpers.js";
 import DBManager from "../utils/db-manager.js";
 
 const GAME = {
@@ -155,12 +155,13 @@ GAME.updateUI = function () {
       this.DOMElements.recordElement.dataset.record = response.length
         ? response[0].score
         : 0;
+      console.log(record.date);
       const tr = `
         <tr>
           <td>${i + 1}</td>
           <td>${record.name}</td>
           <td>${record.score}</td>
-          <td>${record.date}</td>
+          <td>${formatDate(record.date)}</td>
         </tr>
       `;
       return html + tr;

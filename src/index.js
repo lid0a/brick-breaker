@@ -1,6 +1,5 @@
 import "./style.css";
 import GAME from "./game/main.js";
-import { formatDate } from "./utils/helpers.js";
 
 window.onload = () => {
   GAME.init();
@@ -50,11 +49,9 @@ window.onload = () => {
     .querySelector("form")
     .addEventListener("submit", (e) => {
       e.preventDefault();
-      const name = document.getElementById("name").value;
-      const { score } = document.querySelector(
-        ".new-record .game-over__score",
-      ).dataset;
-      GAME.DBManager.addRecord({ name, score, date: formatDate(Date.now()) });
+      const name = e.currentTarget.name.value;
+      const { score } = document.querySelector("[data-score]").dataset;
+      GAME.DBManager.addRecord({ name, score, date: new Date().toISOString() });
       GAME.DOMElements.newRecordDialog.close();
       GAME.reset();
       GAME.init();

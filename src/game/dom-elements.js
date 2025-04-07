@@ -12,6 +12,8 @@ import {
   createTableHeaderCell,
   createTableRow,
 } from "../ui-kit/table.js";
+import { createTextField } from "../ui-kit/text-field.js";
+import { createButton } from "../ui-kit/button.js";
 
 const sidebar = createElement("aside", { class: "sidebar" }, [
   createElement("h1", {}, ["Swipe Brick Breaker"]),
@@ -85,22 +87,20 @@ const gameOverDialog = createDialog({ title: "Game over!" }, {}, [
   createElement("button", { type: "button" }, ["New game"]),
 ]);
 
-const newRecordDialog = createDialog({ title: "New record!" }, {}, [
-  createElement("div", { "data-score": 0 }, ["Score:"]),
-  createElement("form", { class: "new-record__form" }, [
-    createElement("input", {
-      type: "text",
-      id: "name",
-      placeholder: "Enter your name",
-      required: true,
-    }),
-    createElement(
-      "button",
-      { class: "modal__button", type: "submit", id: "submit" },
-      ["Save"],
-    ),
-  ]),
-]);
+const newRecordDialog = createDialog(
+  { title: "New record!" },
+  { class: "new-record-dialog" },
+  [
+    createElement("div", { "data-score": 0 }, ["Score:"]),
+    createElement("form", {}, [
+      createTextField(
+        { label: "Enter your name" },
+        { name: "name", required: true },
+      ),
+      createButton({ type: "submit" }, ["Save"]),
+    ]),
+  ],
+);
 
 document.body.append(settingsDialog);
 document.body.append(bestPlayersDialog);
