@@ -302,3 +302,14 @@ body {
         row-gap: 1rem;
     }
 }
+
+.game-over-dialog {
+    & [data-score] {
+        font-size: 1.5rem;
+        margin-block-end: 1rem;
+        &::after {
+            content: attr(data-score);
+            margin-inline-start: 0.5rem;
+        }
+    }
+}

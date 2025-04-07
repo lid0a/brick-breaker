@@ -82,10 +82,14 @@ const aboutDialog = createDialog({ title: "About" }, {}, [
   ]),
 ]);
 
-const gameOverDialog = createDialog({ title: "Game over!" }, {}, [
-  createElement("div", { "data-score": 0 }, ["Score:"]),
-  createElement("button", { type: "button" }, ["New game"]),
-]);
+const gameOverDialog = createDialog(
+  { title: "Game over!" },
+  { class: "game-over-dialog" },
+  [
+    createElement("div", { "data-score": 0 }, ["Score:"]),
+    createButton({ "data-new-game": true }, ["New game"]),
+  ],
+);
 
 const newRecordDialog = createDialog(
   { title: "New record!" },

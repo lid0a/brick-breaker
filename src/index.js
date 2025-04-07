@@ -5,10 +5,11 @@ window.onload = () => {
   GAME.init();
 
   GAME.DOMElements.gameOverDialog
-    .querySelector("button")
+    .querySelector("[data-new-game]")
     .addEventListener("click", () => {
       GAME.reset();
       GAME.init();
+      GAME.DOMElements.gameOverDialog.close();
     });
 
   GAME.DOMElements.settingsDialog
