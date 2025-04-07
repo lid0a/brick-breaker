@@ -155,7 +155,6 @@ GAME.updateUI = function () {
       this.DOMElements.recordElement.dataset.record = response.length
         ? response[0].score
         : 0;
-      console.log(record.date);
       const tr = `
         <tr>
           <td>${i + 1}</td>
