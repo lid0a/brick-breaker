@@ -1,40 +1,40 @@
 {
-	"name": "swipe-brick-breaker",
-	"version": "1.0.0",
-	"type": "module",
-	"homepage": "https://lid0a.github.io/swipe-brick-breaker",
-	"description": "Browser version of Swipe Brick Breaker game",
-	"scripts": {
-		"build": "webpack --mode production",
-		"dev": "webpack serve",
-		"lint": "eslint src/ --fix",
-		"format": "prettier --write **/*.{js,css,json}",
-		"predeploy": "npm run build",
-		"deploy": "gh-pages -d dist"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/lid0a/swipe-brick-breaker.git"
-	},
-	"author": "Odil",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/lid0a/swipe-brick-breaker/issues"
-	},
-	"devDependencies": {
-		"@eslint/js": "^9.23.0",
-		"clean-webpack-plugin": "^3.0.0",
-		"copy-webpack-plugin": "^13.0.0",
-		"css-loader": "^7.1.2",
-		"eslint": "^9.23.0",
-		"gh-pages": "^6.3.0",
-		"html-webpack-plugin": "^5.6.3",
-		"lefthook": "^1.11.8",
-		"mini-css-extract-plugin": "^2.9.2",
-		"prettier": "^3.5.3",
-		"style-loader": "^4.0.0",
-		"webpack": "^5.98.0",
-		"webpack-cli": "^6.0.1",
-		"webpack-dev-server": "^5.2.1"
-	}
+  "name": "swipe-brick-breaker",
+  "version": "1.0.0",
+  "type": "module",
+  "homepage": "https://lid0a.github.io/swipe-brick-breaker",
+  "description": "Browser version of Swipe Brick Breaker game",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack serve",
+    "lint": "eslint src/ --fix",
+    "format": "prettier --write **/*.{js,css,json}",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lid0a/swipe-brick-breaker.git"
+  },
+  "author": "Odil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lid0a/swipe-brick-breaker/issues"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.23.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^13.0.0",
+    "css-loader": "^7.1.2",
+    "eslint": "^9.23.0",
+    "gh-pages": "^6.3.0",
+    "html-webpack-plugin": "^5.6.3",
+    "lefthook": "^1.11.8",
+    "mini-css-extract-plugin": "^2.9.2",
+    "prettier": "^3.5.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.98.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.1"
+  }
 }
