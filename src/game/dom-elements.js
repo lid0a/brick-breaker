@@ -4,7 +4,6 @@ import { createElement } from '../utils/dom.js';
 import gearIcon from '../assets/icons/gear.svg';
 import starIcon from '../assets/icons/star.svg';
 import infoIcon from '../assets/icons/info.svg';
-import githubIcon from '../assets/icons/github.svg';
 import {
   createTable,
   createTableBody,
@@ -16,7 +15,7 @@ import { createTextField } from '../ui-kit/text-field.js';
 import { createButton } from '../ui-kit/button.js';
 
 const sidebar = createElement('aside', { class: 'sidebar' }, [
-  createElement('h1', {}, ['Swipe Brick Breaker']),
+  createElement('h1', {}, ['Brick Breaker']),
   createElement('div', { class: 'sidebar-display' }, [
     createElement('div', { class: 'record', 'data-record': '0' }, ['Record:']),
     createElement('div', { class: 'score', 'data-score': '0' }, ['Score:']),
@@ -72,8 +71,7 @@ const aboutDialog = createDialog({ title: 'About' }, {}, [
   createElement('p', {}, [
     'Created by&nbsp;',
     createElement('a', { href: 'https://github.com/lid0a', target: '_blank' }, [
-      githubIcon,
-      '&nbsp;lid0a',
+      'lid0a',
     ]),
     '&nbsp;for the&nbsp;',
     createElement('a', { href: 'https://rs.school', target: '_blank' }, [
