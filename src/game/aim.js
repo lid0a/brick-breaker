@@ -1,4 +1,4 @@
-import { Point2D, Line } from "../engine/utils.js";
+import { Point2D, Line } from '../engine/utils.js';
 
 function getMousePosition(event) {
   const rect = event.target.getBoundingClientRect();

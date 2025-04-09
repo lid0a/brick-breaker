@@ -43,5 +43,5 @@ export function findByField(objects, field, x) {
 }
 
 export function cx(...classNames) {
-  return classNames?.filter(Boolean).join(" ");
+  return classNames?.filter(Boolean).join(' ');
 }

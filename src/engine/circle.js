@@ -1,4 +1,4 @@
-import Ellipse from "./ellipse.js";
+import Ellipse from './ellipse.js';
 
 export default class Circle extends Ellipse {
   constructor(context, position, radius) {

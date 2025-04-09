@@ -1,5 +1,5 @@
-import { Circle } from "../engine/utils.js";
-import gameOptions from "./options.js";
+import { Circle } from '../engine/utils.js';
+import gameOptions from './options.js';
 
 export default class Bonus extends Circle {
   draw(color) {

@@ -7,7 +7,7 @@ export function createElement(tagName, attrs = {}, children = []) {
     if (!child) {
       continue;
     }
-    if (typeof child === "string") {
+    if (typeof child === 'string') {
       element.innerHTML += child;
     } else {
       element.appendChild(child);

@@ -1,4 +1,4 @@
-import Shape from "./shape.js";
+import Shape from './shape.js';
 
 export default class Line extends Shape {
   constructor(context, begin, end) {

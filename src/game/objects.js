@@ -1,7 +1,7 @@
-import { createElement } from "../utils/dom.js";
-import { Point2D } from "../engine/utils.js";
-import Aim from "./aim.js";
-import gameOptions from "./options.js";
+import { createElement } from '../utils/dom.js';
+import { Point2D } from '../engine/utils.js';
+import Aim from './aim.js';
+import gameOptions from './options.js';
 
 const gameObjects = {
   balls: [],
@@ -9,9 +9,9 @@ const gameObjects = {
   bonuses: [],
 };
 
-gameObjects.field = createElement("canvas", {
-  id: "game-field",
-  class: "game-field",
+gameObjects.field = createElement('canvas', {
+  id: 'game-field',
+  class: 'game-field',
   width:
     gameOptions.COLUMNS * gameOptions.BLOCK_WIDTH +
     (gameOptions.COLUMNS - 1) * gameOptions.INTERVAL_SIZE,
@@ -20,7 +20,7 @@ gameObjects.field = createElement("canvas", {
     (gameOptions.ROWS - 1) * gameOptions.INTERVAL_SIZE,
 });
 
-gameObjects.context = gameObjects.field.getContext("2d");
+gameObjects.context = gameObjects.field.getContext('2d');
 
 gameObjects.aim = new Aim(
   gameObjects.context,

@@ -111,7 +111,7 @@ body {
   gap: 1rem;
   font-size: 1.25rem;
   color: var(--color-text);
-  & input[type="checkbox"] {
+  & input[type='checkbox'] {
     --height: 2rem;
     --padding: calc(var(--height) * 0.1);
     --thumb-size: calc(var(--height) - 2 * var(--padding));
@@ -129,7 +129,7 @@ body {
       background: var(--color-accent);
     }
     &::before {
-      content: "";
+      content: '';
       display: block;
       position: absolute;
       transform: translateY(-50%);

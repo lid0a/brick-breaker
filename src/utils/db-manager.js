@@ -6,10 +6,10 @@ export default class DBManager {
   async addRecord(record) {
     try {
       const response = await fetch(this.url, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(record),
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       return await response.json();
@@ -22,9 +22,9 @@ export default class DBManager {
   async getRecords() {
     try {
       const response = await fetch(this.url, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
       const records = await response.json();

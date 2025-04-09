@@ -1,15 +1,15 @@
-import gameOptions from "./options.js";
-import gameState from "./state.js";
-import gameObjects from "./objects.js";
-import gameDOMElements from "./dom-elements.js";
+import gameOptions from './options.js';
+import gameState from './state.js';
+import gameObjects from './objects.js';
+import gameDOMElements from './dom-elements.js';
 
-import Block from "./block.js";
-import Ball from "./ball.js";
-import Bonus from "./bonus.js";
-import { Point2D, collisionDetected, distance } from "../engine/utils.js";
-import { renderDOMElement } from "../utils/dom.js";
-import { getCachedRandom, findByField, formatDate } from "../utils/helpers.js";
-import DBManager from "../utils/db-manager.js";
+import Block from './block.js';
+import Ball from './ball.js';
+import Bonus from './bonus.js';
+import { Point2D, collisionDetected, distance } from '../engine/utils.js';
+import { renderDOMElement } from '../utils/dom.js';
+import { getCachedRandom, findByField, formatDate } from '../utils/helpers.js';
+import DBManager from '../utils/db-manager.js';
 
 const GAME = {
   options: gameOptions,
@@ -17,7 +17,7 @@ const GAME = {
   state: gameState,
   DOMElements: gameDOMElements,
   DBManager: new DBManager(
-    "https://swipe-brick-breaker-52559-default-rtdb.firebaseio.com/players.json",
+    'https://swipe-brick-breaker-52559-default-rtdb.firebaseio.com/players.json',
   ),
   highScores: null,
 };
@@ -88,7 +88,7 @@ GAME.strictClearField = function () {
 GAME.trailingClearField = function () {
   this.objects.context.save();
   const bgColor = getComputedStyle(this.objects.field).getPropertyValue(
-    "--color-background",
+    '--color-background',
   );
   this.objects.context.fillStyle = bgColor;
   this.objects.context.fillRect(
@@ -164,8 +164,8 @@ GAME.updateUI = function () {
         </tr>
       `;
       return html + tr;
-    }, "");
-    this.DOMElements.bestPlayersDialog.querySelector("tbody").innerHTML = rows;
+    }, '');
+    this.DOMElements.bestPlayersDialog.querySelector('tbody').innerHTML = rows;
   });
 };
 
@@ -185,7 +185,7 @@ GAME.startNewStage = function () {
   });
   if (this.gameOver()) {
     this.highScores
-      .then((response) => findByField(response, "score", this.state.level - 1))
+      .then((response) => findByField(response, 'score', this.state.level - 1))
       .then((position) => {
         if (position < this.options.MAX_RECORDS_COUNT - 1) {
           this.DOMElements.newRecordDialog.showModal();
@@ -435,13 +435,13 @@ GAME.init = function () {
     .then((sortedRecords) =>
       sortedRecords.slice(0, this.options.MAX_RECORDS_COUNT),
     );
-  renderDOMElement(this.objects.field, document.getElementById("app"));
+  renderDOMElement(this.objects.field, document.getElementById('app'));
   this.createBlocksAndBonus();
   this.createBall();
   this.updateUI();
-  this.objects.field.addEventListener("mousedown", handleMouseDown);
-  this.objects.field.addEventListener("mousemove", handleMouseMove);
-  this.objects.field.addEventListener("mouseup", handleMouseUp);
+  this.objects.field.addEventListener('mousedown', handleMouseDown);
+  this.objects.field.addEventListener('mousemove', handleMouseMove);
+  this.objects.field.addEventListener('mouseup', handleMouseUp);
 };
 
 GAME.reset = function () {
@@ -464,9 +464,9 @@ GAME.reset = function () {
   this.state.newBallsCount = 0;
   this.strictClearField();
   this.redrawObjects();
-  this.objects.field.removeEventListener("mousedown", handleMouseDown);
-  this.objects.field.removeEventListener("mousemove", handleMouseMove);
-  this.objects.field.removeEventListener("mouseup", handleMouseUp);
+  this.objects.field.removeEventListener('mousedown', handleMouseDown);
+  this.objects.field.removeEventListener('mousemove', handleMouseMove);
+  this.objects.field.removeEventListener('mouseup', handleMouseUp);
   this.objects.field.remove();
 };
 

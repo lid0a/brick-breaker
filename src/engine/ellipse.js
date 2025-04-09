@@ -1,5 +1,5 @@
-import Shape from "./shape.js";
-import Point2D from "./point2d.js";
+import Shape from './shape.js';
+import Point2D from './point2d.js';
 
 export default class Ellipse extends Shape {
   get center() {

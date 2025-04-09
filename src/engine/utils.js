@@ -1,9 +1,9 @@
-export { default as Point2D } from "./point2d.js";
-export { default as Shape } from "./shape.js";
-export { default as Rectangle } from "./rectangle.js";
-export { default as Ellipse } from "./ellipse.js";
-export { default as Circle } from "./circle.js";
-export { default as Line } from "./line.js";
+export { default as Point2D } from './point2d.js';
+export { default as Shape } from './shape.js';
+export { default as Rectangle } from './rectangle.js';
+export { default as Ellipse } from './ellipse.js';
+export { default as Circle } from './circle.js';
+export { default as Line } from './line.js';
 
 export const collisionDetected = (shape1, shape2) =>
   shape1.position.x <= shape2.position.x + shape2.width &&

@@ -1,107 +1,107 @@
-import { createDialog } from "../ui-kit/dialog.js";
-import { createSwitch } from "../ui-kit/switch.js";
-import { createElement } from "../utils/dom.js";
-import gearIcon from "../assets/icons/gear.svg";
-import starIcon from "../assets/icons/star.svg";
-import infoIcon from "../assets/icons/info.svg";
-import githubIcon from "../assets/icons/github.svg";
+import { createDialog } from '../ui-kit/dialog.js';
+import { createSwitch } from '../ui-kit/switch.js';
+import { createElement } from '../utils/dom.js';
+import gearIcon from '../assets/icons/gear.svg';
+import starIcon from '../assets/icons/star.svg';
+import infoIcon from '../assets/icons/info.svg';
+import githubIcon from '../assets/icons/github.svg';
 import {
   createTable,
   createTableBody,
   createTableHead,
   createTableHeaderCell,
   createTableRow,
-} from "../ui-kit/table.js";
-import { createTextField } from "../ui-kit/text-field.js";
-import { createButton } from "../ui-kit/button.js";
+} from '../ui-kit/table.js';
+import { createTextField } from '../ui-kit/text-field.js';
+import { createButton } from '../ui-kit/button.js';
 
-const sidebar = createElement("aside", { class: "sidebar" }, [
-  createElement("h1", {}, ["Swipe Brick Breaker"]),
-  createElement("div", { class: "sidebar-display" }, [
-    createElement("div", { class: "record", "data-record": "0" }, ["Record:"]),
-    createElement("div", { class: "score", "data-score": "0" }, ["Score:"]),
-    createElement("div", { class: "balls", "data-balls": "1" }, ["Balls:"]),
+const sidebar = createElement('aside', { class: 'sidebar' }, [
+  createElement('h1', {}, ['Swipe Brick Breaker']),
+  createElement('div', { class: 'sidebar-display' }, [
+    createElement('div', { class: 'record', 'data-record': '0' }, ['Record:']),
+    createElement('div', { class: 'score', 'data-score': '0' }, ['Score:']),
+    createElement('div', { class: 'balls', 'data-balls': '1' }, ['Balls:']),
   ]),
-  createElement("ul", { class: "sidebar-menu" }, [
+  createElement('ul', { class: 'sidebar-menu' }, [
     createElement(
-      "li",
-      { class: "sidebar-menu-item", "data-item": "settings" },
-      [gearIcon, createElement("span", {}, ["Settings"])],
+      'li',
+      { class: 'sidebar-menu-item', 'data-item': 'settings' },
+      [gearIcon, createElement('span', {}, ['Settings'])],
     ),
     createElement(
-      "li",
-      { class: "sidebar-menu-item", "data-item": "best-players" },
-      [starIcon, createElement("span", {}, ["Best players"])],
+      'li',
+      { class: 'sidebar-menu-item', 'data-item': 'best-players' },
+      [starIcon, createElement('span', {}, ['Best players'])],
     ),
-    createElement("li", { class: "sidebar-menu-item", "data-item": "about" }, [
+    createElement('li', { class: 'sidebar-menu-item', 'data-item': 'about' }, [
       infoIcon,
-      createElement("span", {}, ["About"]),
+      createElement('span', {}, ['About']),
     ]),
   ]),
 ]);
 
-const settingsDialog = createDialog({ title: "Settings" }, {}, [
+const settingsDialog = createDialog({ title: 'Settings' }, {}, [
   createElement(
-    "div",
+    'div',
     {
-      class: "settings-dialog-content",
+      class: 'settings-dialog-content',
     },
     [
-      createSwitch({ label: "Sound" }, { id: "sound", checked: true }),
-      createSwitch({ label: "Aiming" }, { id: "aiming", checked: true }),
-      createSwitch({ label: "Dark mode" }, { id: "dark-mode" }),
+      createSwitch({ label: 'Sound' }, { id: 'sound', checked: true }),
+      createSwitch({ label: 'Aiming' }, { id: 'aiming', checked: true }),
+      createSwitch({ label: 'Dark mode' }, { id: 'dark-mode' }),
     ],
   ),
 ]);
 
-const bestPlayersDialog = createDialog({ title: "Best players" }, {}, [
+const bestPlayersDialog = createDialog({ title: 'Best players' }, {}, [
   createTable({}, [
     createTableHead({}, [
       createTableRow({}, [
-        createTableHeaderCell({}, ["#"]),
-        createTableHeaderCell({}, ["Name"]),
-        createTableHeaderCell({}, ["Score"]),
-        createTableHeaderCell({}, ["Date"]),
+        createTableHeaderCell({}, ['#']),
+        createTableHeaderCell({}, ['Name']),
+        createTableHeaderCell({}, ['Score']),
+        createTableHeaderCell({}, ['Date']),
       ]),
     ]),
     createTableBody(),
   ]),
 ]);
 
-const aboutDialog = createDialog({ title: "About" }, {}, [
-  createElement("p", {}, [
-    "Created by&nbsp;",
-    createElement("a", { href: "https://github.com/lid0a", target: "_blank" }, [
+const aboutDialog = createDialog({ title: 'About' }, {}, [
+  createElement('p', {}, [
+    'Created by&nbsp;',
+    createElement('a', { href: 'https://github.com/lid0a', target: '_blank' }, [
       githubIcon,
-      "&nbsp;lid0a",
+      '&nbsp;lid0a',
     ]),
-    "&nbsp;for the&nbsp;",
-    createElement("a", { href: "https://rs.school", target: "_blank" }, [
-      "Rolling Scopes School",
+    '&nbsp;for the&nbsp;',
+    createElement('a', { href: 'https://rs.school', target: '_blank' }, [
+      'Rolling Scopes School',
     ]),
   ]),
 ]);
 
 const gameOverDialog = createDialog(
-  { title: "Game over!" },
-  { class: "game-over-dialog" },
+  { title: 'Game over!' },
+  { class: 'game-over-dialog' },
   [
-    createElement("div", { "data-score": 0 }, ["Score:"]),
-    createButton({ "data-new-game": true }, ["New game"]),
+    createElement('div', { 'data-score': 0 }, ['Score:']),
+    createButton({ 'data-new-game': true }, ['New game']),
   ],
 );
 
 const newRecordDialog = createDialog(
-  { title: "New record!" },
-  { class: "new-record-dialog" },
+  { title: 'New record!' },
+  { class: 'new-record-dialog' },
   [
-    createElement("div", { "data-score": 0 }, ["Score:"]),
-    createElement("form", {}, [
+    createElement('div', { 'data-score': 0 }, ['Score:']),
+    createElement('form', {}, [
       createTextField(
-        { label: "Enter your name" },
-        { name: "name", required: true },
+        { label: 'Enter your name' },
+        { name: 'name', required: true },
       ),
-      createButton({ type: "submit" }, ["Save"]),
+      createButton({ type: 'submit' }, ['Save']),
     ]),
   ],
 );
@@ -111,21 +111,21 @@ document.body.append(bestPlayersDialog);
 document.body.append(aboutDialog);
 document.body.append(gameOverDialog);
 document.body.append(newRecordDialog);
-document.querySelector("#app").append(sidebar);
+document.querySelector('#app').append(sidebar);
 
 const gameDOMElements = {
-  scoreElements: document.querySelectorAll("[data-score]"),
-  ballsElement: document.querySelector(".balls"),
-  recordElement: document.querySelector(".record"),
+  scoreElements: document.querySelectorAll('[data-score]'),
+  ballsElement: document.querySelector('.balls'),
+  recordElement: document.querySelector('.record'),
   settingsMenuItemElement: document.querySelector("[data-item='settings']"),
   bestPlayersMenuItemElement: document.querySelector(
     "[data-item='best-players']",
   ),
   aboutMenuItemElement: document.querySelector("[data-item='about']"),
-  blockBumpSound: new Audio("./public/audio/block-bump.mp3"),
-  bonusBumpSound: new Audio("./public/audio/bonus-bump.mp3"),
-  newStageSound: new Audio("./public/audio/new-stage.mp3"),
-  gameOverSound: new Audio("./public/audio/game-over.mp3"),
+  blockBumpSound: new Audio('./public/audio/block-bump.mp3'),
+  bonusBumpSound: new Audio('./public/audio/bonus-bump.mp3'),
+  newStageSound: new Audio('./public/audio/new-stage.mp3'),
+  gameOverSound: new Audio('./public/audio/game-over.mp3'),
 
   settingsDialog,
   bestPlayersDialog,
@@ -135,20 +135,20 @@ const gameDOMElements = {
 };
 
 gameDOMElements.gameOverDialog
-  .querySelector("button")
-  .addEventListener("click", () => {
+  .querySelector('button')
+  .addEventListener('click', () => {
     gameDOMElements.gameOverDialog.showModal();
   });
 
-gameDOMElements.settingsMenuItemElement.addEventListener("click", () => {
+gameDOMElements.settingsMenuItemElement.addEventListener('click', () => {
   gameDOMElements.settingsDialog.showModal();
 });
 
-gameDOMElements.bestPlayersMenuItemElement.addEventListener("click", () => {
+gameDOMElements.bestPlayersMenuItemElement.addEventListener('click', () => {
   gameDOMElements.bestPlayersDialog.showModal();
 });
 
-gameDOMElements.aboutMenuItemElement.addEventListener("click", () => {
+gameDOMElements.aboutMenuItemElement.addEventListener('click', () => {
   gameDOMElements.aboutDialog.showModal();
 });
 

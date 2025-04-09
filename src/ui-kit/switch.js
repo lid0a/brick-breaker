@@ -1,11 +1,11 @@
-import { createElement } from "../utils/dom.js";
+import { createElement } from '../utils/dom.js';
 
 export function createSwitch(props, attrs = {}) {
-  const input = createElement("input", {
+  const input = createElement('input', {
     ...attrs,
-    type: "checkbox",
+    type: 'checkbox',
   });
-  const label = createElement("label", { class: "switch" }, [
+  const label = createElement('label', { class: 'switch' }, [
     input,
     props.label,
   ]);
