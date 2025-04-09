@@ -1,8 +1,8 @@
 {
-  "name": "swipe-brick-breaker",
+  "name": "brick-breaker",
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://lid0a.github.io/swipe-brick-breaker",
+  "homepage": "https://lid0a.github.io/brick-breaker",
   "description": "Browser version of Swipe Brick Breaker game",
   "scripts": {
     "build": "webpack --mode production",
@@ -14,12 +14,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lid0a/swipe-brick-breaker.git"
+    "url": "git+https://github.com/lid0a/brick-breaker.git"
   },
   "author": "Odil",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lid0a/swipe-brick-breaker/issues"
+    "url": "https://github.com/lid0a/brick-breaker/issues"
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
