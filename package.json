@@ -10,11 +10,7 @@
 		"lint": "eslint src/ --fix",
 		"format": "prettier --write **/*.{js,css,json}",
 		"predeploy": "npm run build",
-		"deploy": "gh-pages -d dist",
-		"prepare": "husky"
-	},
-	"lint-staged": {
-		"**/*": "prettier --write --ignore-unknown"
+		"deploy": "gh-pages -d dist"
 	},
 	"repository": {
 		"type": "git",
@@ -34,7 +30,6 @@
 		"gh-pages": "^6.3.0",
 		"html-webpack-plugin": "^5.6.3",
 		"lefthook": "^1.11.8",
-		"lint-staged": "^15.5.0",
 		"mini-css-extract-plugin": "^2.9.2",
 		"prettier": "^3.5.3",
 		"style-loader": "^4.0.0",
