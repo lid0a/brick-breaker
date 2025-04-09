@@ -2,4 +2,5 @@
 
 [Demo](https://lid0a.github.io/brick-breaker/)
 
-![Brick Breaker](https://user-images.githubusercontent.com/70815650/106704113-53b65b80-660d-11eb-97f4-56e2e0069556.gif)
+https://github.com/user-attachments/assets/48a3f7f8-0e05-46c7-8edb-ad6c6355fb73
+
